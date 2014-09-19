@@ -1,62 +1,65 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 /**
- * Class parses text file with a given name and counts number of lines, words and characters in the text file.
+ * Class parses text file with a given name and counts number of lines, words
+ * and characters in the text file.
  */
 public class ContentAnalyzer {
 
 	/**
+	 * Name of a file containing the path to that file.
+	 */
+	private String _fileName;
+
+	/**
+	 * Counts number of characters in a file.
+	 */
+	private int _numberOfCharacters;
+
+	/**
+	 * Counts number of lines in a file.
+	 */
+	private int _numberOfLines;
+
+	/**
+	 * Counts number of words in a file.
+	 */
+	private int _numberOfWords;
+
+	/**
 	 * Constructor.
-	 * @param fileName codes file name (with path if necessary). 
+	 * 
+	 * @param fileName
+	 *            codes file name (with path if necessary).
 	 */
 	public ContentAnalyzer(String fileName) {
 		_fileName = fileName;
 	}
-	
-	/**
-	 * Name of a file containing the path to that file.
-	 */
-	private String _fileName;
-	
-	/**
-	 * Counts number of characters in a file. 
-	 */
-	private int _numberOfCharacters = 0;
-	
-	/**
-	 * Counts number of lines in a file.
-	 */
-	private int _numberOfLines = 0;
-	
-	/**
-	 * Counts number of words in a file.
-	 */
-	private int _numberOfWords = 0;
 
 	/**
-	 * Reads file with a given name and count number of lines, words and characters in that file.
-	 * @throws IOException in case when given file can not be found.
+	 * Reads file with a given name and count number of lines, words and
+	 * characters in that file.
+	 * 
+	 * @throws IOException
+	 *             in case when given file can not be found.
 	 */
 	public void analyzeFileContent() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(_fileName));
-		
-		try {
+
+		try (BufferedReader br = new BufferedReader(new FileReader(_fileName))) {
 			String line = br.readLine();
 
 			while (line != null) {
 				_numberOfLines++;
-				String[] words = line.trim().split("\\s+");
-				if (words.length >= 1 && !words[0].isEmpty()) {
-					_numberOfWords += words.length;
+				StringTokenizer st = new StringTokenizer(line);
+				while (st.hasMoreTokens()) {
+					_numberOfWords++;
+					_numberOfCharacters += st.nextToken().length();
 				}
-				_numberOfCharacters += line.replaceAll("\\s+", "").length();
-				
 				line = br.readLine();
 			}
-		} finally {
-			br.close();
 		}
 	}
 
