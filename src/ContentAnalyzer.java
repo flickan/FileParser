@@ -14,6 +14,26 @@ public class ContentAnalyzer {
 	public ContentAnalyzer(String fileName) {
 		_fileName = fileName;
 	}
+	
+	/**
+	 * Name of a file containing the path to that file.
+	 */
+	private String _fileName;
+	
+	/**
+	 * Counts number of characters in a file. 
+	 */
+	private int _numberOfCharacters = 0;
+	
+	/**
+	 * Counts number of lines in a file.
+	 */
+	private int _numberOfLines = 0;
+	
+	/**
+	 * Counts number of words in a file.
+	 */
+	private int _numberOfWords = 0;
 
 	/**
 	 * Reads file with a given name and count number of lines, words and characters in that file.
@@ -57,24 +77,4 @@ public class ContentAnalyzer {
 	public int getNumberOfWords() {
 		return _numberOfWords;
 	}
-
-	/**
-	 * Name of a file containing the path to that file.
-	 */
-	private String _fileName;
-	
-	/**
-	 * Counts number of characters in a file. 
-	 */
-	private int _numberOfCharacters = 0;
-	
-	/**
-	 * Counts number of lines in a file.
-	 */
-	private int _numberOfLines = 0;
-	
-	/**
-	 * Counts number of words in a file.
-	 */
-	private int _numberOfWords = 0;
 }
