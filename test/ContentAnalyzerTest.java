@@ -98,5 +98,15 @@ public class ContentAnalyzerTest {
 		assertEquals(63, analyzer.getNumberOfCharacters());
 		
 	}
+	
+	/**
+	 * Test for a non existing file.
+	 * @throws IOException 
+	 */
+	@Test(expected = Exception.class)  
+	public void testNonExistingFile() throws IOException {
+		ContentAnalyzer analyzer = new ContentAnalyzer("input/file777.txt");
+		analyzer.analyzeFileContent();
+	}
 
 }
