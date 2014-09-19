@@ -47,7 +47,10 @@ public class ContentAnalyzer {
 
 			while (line != null) {
 				_numberOfLines++;
-				_numberOfWords += line.trim().split("\\s+").length;
+				String[] words = line.trim().split("\\s+");
+				if (words.length >= 1 && !words[0].isEmpty()) {
+					_numberOfWords += words.length;
+				}
 				_numberOfCharacters += line.replaceAll("\\s+", "").length();
 				
 				line = br.readLine();
